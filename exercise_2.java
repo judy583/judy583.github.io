@@ -4,11 +4,9 @@ public class exercise_2 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        // Constants
         double hourlyRate = 30.65;
         String businessName = "Brianna Watt DBA Watt Gives";
 
-        // Inputs
         System.out.print("Enter the client's business name: ");
         String clientName = input.nextLine();
 
@@ -21,11 +19,9 @@ public class exercise_2 {
         System.out.print("Enter hours worked for Day 3: ");
         double day3 = input.nextDouble();
 
-        // Calculations
         double totalHours = day1 + day2 + day3;
         double totalAmount = totalHours * hourlyRate;
 
-        // Output Invoice
         System.out.println("\n" + businessName);
         System.out.println("Invoice for " + clientName);
         System.out.println("Hours: " + (int)totalHours);
