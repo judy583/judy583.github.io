@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class WattGivesInvoice {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        // Constants
+        double HOURLY_RATE = 30.65;
+        String BUSINESS_NAME = "Brianna Watt DBA Watt Gives";
+
+        // Gather Input
+        System.out.print("Enter the client's business name: ");
+        String clientName = input.nextLine();
+
+        double totalHours = 0;
+        
+        // Loop to get hours for 3 days
+        for (int i = 1; i <= 3; i++) {
+            System.out.print("Enter hours worked for day " + i + ": ");
+            totalHours += input.nextDouble();
+        }
+
+        // Calculation
+        double totalAmount = totalHours * HOURLY_RATE;
+
+        // Display Invoice
+        System.out.println("\n------------------------------");
+        System.out.println(BUSINESS_NAME);
+        System.out.println("Invoice for " + clientName);
+        System.out.println("Hours: " + totalHours);
+        System.out.println("Rate: $" + HOURLY_RATE);
+        System.out.printf("Total: $%.2f%n", totalAmount);
+        System.out.println("------------------------------");
+        
+        input.close();
+    }
+}
