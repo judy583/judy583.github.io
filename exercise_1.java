@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
-class Main {
-
+public class exercise_1 {
     public static void main(String[] args) {
-
         Scanner input = new Scanner(System.in);
 
         System.out.print("Please enter your goal in number of sales: ");
@@ -15,9 +13,9 @@ class Main {
         double numberPerDay = total / days;
 
         System.out.println("You will need to make " + numberPerDay + 
-        " sales each day in order to reach your goal of " + 
-        total + " in " + days + " days");
+                           " sales each day in order to reach your goal of " + 
+                           total + " in " + days + " days");
 
-        input.close(); //
+        input.close();
     }
 }
