@@ -1,0 +1,14 @@
+import string
+
+def encrypt_with_shift(text, shift):
+    alphabet = string.ascii_lowercase
+    result = ""
+    for char in text:
+        if char.lower() in alphabet:
+            idx = alphabet.index(char.lower())
+            new_idx = (idx + shift) % 26
+            new_char = alphabet[new_idx]
+            result += new_char.upper() if char.isupper() else new_char
+        else:
+            result += char
+    return result
