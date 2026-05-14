@@ -1,0 +1,39 @@
+from flask import Flask, render_template
+import random
+
+app = Flask(__name__)
+
+adjectives = ["shiny", "grumpy", "magical", "stinky", "gigantic", "tiny", "invisible", "brave", "clumsy", "fluffy"]
+nouns = ["dragon", "toaster", "bicycle", "hamster", "spaceship", "pancake", "cactus", "umbrella", "wizard", "potato"]
+verbs = ["dances", "explodes", "sings", "flies", "sneezes", "tickles", "whispers", "teleports", "jumps", "cooks"]
+verbs_past = ["galloped", "cried", "teleported", "ate", "smashed", "bounced", "discovered", "stole", "painted", "yelled"]
+places = ["Mars", "the kitchen", "a dark cave", "Hawaii", "the moon", "under the bed", "a pizza shop", "the library"]
+emotions = ["happy", "confused", "terrified", "excited", "sleepy", "angry", "jealous", "lonely"]
+numbers = ["7", "100", "42", "999", "1", "over 9000", "zero", "a million"]
+
+@app.route('/madlib')
+def madlib():
+    choices = {
+        "adj1": random.choice(adjectives),
+        "adj2": random.choice(adjectives),
+        "noun1": random.choice(nouns),
+        "noun2": random.choice(nouns),
+        "verb": random.choice(verbs),
+        "verb_past": random.choice(verbs_past),
+        "place": random.choice(places),
+        "emotion": random.choice(emotions),
+        "number": random.choice(numbers)
+    }
+
+    story = f"""
+    Once upon a time, in {choices['place']}, there lived a {choices['adj1']} {choices['noun1']}. 
+    One day, it found {choices['number']} {choices['adj2']} {choices['noun2']}s. 
+    It felt very {choices['emotion']} and suddenly {choices['verb_past']} all over the place! 
+    Now, every time you visit {choices['place']}, you can see it as it {choices['verb']} to this very day.
+    """
+
+    return render_template('madlib.html', story=story)
+
+@app.route('/')
+def home():
+    return '<h1>Welcome!</h1><a href="/madlib">Generate a Mad Lib Story!</a>'
