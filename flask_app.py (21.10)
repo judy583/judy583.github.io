@@ -1,0 +1,32 @@
+from flask import Flask, render_template, request
+from encrypt import encrypt_with_shift 
+app = Flask(__name__)
+
+@app.route('/user_message', methods=['GET', 'POST'])
+def user_message():
+    message = ""
+    coded_message = ""
+    error_msg = ""
+
+    if request.method == 'POST':
+        message = request.form['message']
+        shift_str = request.form['shift']
+        action = request.form['action']
+
+        try:
+            shift = int(shift_str)
+            if not (1 <= shift <= 25):
+                error_msg = "Shift value must be between 1 and 25."
+            elif not any(c.isalpha() for c in message):
+                error_msg = "Message must contain at least one letter."
+            else:
+                if action == 'decrypt':
+                    shift = -shift
+                coded_message = encrypt_with_shift(message, shift)
+        except ValueError:
+            error_msg = "Invalid shift value."
+
+    return render_template('user_message.html', 
+                           message=message, 
+                           coded_message=coded_message, 
+                           error_msg=error_msg)
