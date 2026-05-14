@@ -1,0 +1,32 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+def valid_hex_chars(hex_string):
+    valid_chars = "0123456789ABCDEFabcdef"
+    for char in hex_string:
+        if char not in valid_chars:
+            return False
+    return True
+
+@app.route('/hex_form', methods=["GET", "POST"])
+def hex_form():
+    if request.method == 'POST':
+        hex_value = request.form['hex']
+        
+        if len(hex_value) != 6:
+            feedback = f"Error: '{hex_value}' is not 6 characters long."
+            hex_value = 'FF0000' 
+            
+        elif not valid_hex_chars(hex_value):
+            feedback = f"Error: '{hex_value}' contains invalid characters."
+            hex_value = 'FF0000' 
+            
+        else:
+            feedback = "Successful submission!"
+            
+    else:
+        hex_value = 'FF0000'
+        feedback = ''
+
+    return render_template('hex_form.html', hex=hex_value, feedback=feedback)
