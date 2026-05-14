@@ -1,0 +1,12 @@
+<form action="/user_message" method="POST">
+    <textarea name="message" required>{{ message }}</textarea><br>
+    <label>Shift by: <input type="number" name="shift" min="1" max="25" required></label><br>
+    <label><input type="radio" name="action" value="encrypt" checked> Encrypt</label>
+    <label><input type="radio" name="action" value="decrypt"> Decrypt</label><br>
+    <button type="submit">Run</button>
+</form>
+
+<div class="results">
+    <p><strong>Original Message:</strong> <i>{{ message }}</i></p>
+    <p><strong>Coded Message:</strong> <i>{{ coded_message }}</i></p>
+    <p style="color: red;">{{ error_msg }}</p> </div>
